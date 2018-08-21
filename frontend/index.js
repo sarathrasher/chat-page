@@ -53,6 +53,7 @@ $formContainer.on('submit', (event) => {
   let formData = {user: username, message: $messageInput.val(), timestamp: new Date()}
   console.log(formData);
   socket.send(JSON.stringify(formData));
+  $formContainer.trigger('reset');
 })
 
 socket.addEventListener('message', (event) => {
