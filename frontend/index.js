@@ -1,5 +1,3 @@
-console.log("Make me do things!");
-
 const socket = new WebSocket('ws://localhost:3001');
 
 var username = prompt('What is your username?');
@@ -46,18 +44,14 @@ socket.addEventListener('open', () => {
   console.log('You have connected.');
 });
 
-console.log($formContainer);
-
 $formContainer.on('submit', (event) => {
   event.preventDefault();
   let formData = {user: username, message: $messageInput.val(), timestamp: new Date()}
-  console.log(formData);
   socket.send(JSON.stringify(formData));
   $formContainer.trigger('reset');
 })
 
 socket.addEventListener('message', (event) => {
-  console.log(event.data);
   let newMessage = drawMessage(JSON.parse(event.data));
   $messageContainer.append(newMessage);
   newMessage.get(0).scrollIntoView();
